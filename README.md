@@ -36,17 +36,7 @@ pnpm install
 
 ## Usage
 
-To use the application, configure the database in the db folder and seed the database with randomized data by executing: 
-
-```
-npm run seed
-
-or
-
-pnpm run seed
-```
-
-Then run this in your terminal:
+To use the application, run: 
 
 ```
 npm start
@@ -54,16 +44,6 @@ npm start
 or 
 
 pnpm start
-```
-
-If you want to watch the database using nodemon, run this instead of the start script:
-
-```
-npm dev
-
-or 
-
-pnpm dev
 ```
 
 ## Contributors
@@ -77,4 +57,4 @@ pnpm dev
 
 ## Questions?
 
-If you have any questions, please reach out to [RandyYanish](https://github.com/RandyYanish) at rtaylorfargo@gmail.com.
+If you have any questions, please don't reach out. Thanks!
