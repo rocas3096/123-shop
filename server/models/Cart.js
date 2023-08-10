@@ -21,6 +21,13 @@ const cartSchema = new Schema({
     ],
 });
 
+// Define a virtual field for the total amount
+cartSchema.virtual('totalAmount').get(function() {
+    return this.item.reduce((total, cartItem) => {
+        return total + cartItem.quantity * cartItem.product.price;
+    }, 0);
+});
+
 const Cart = model('Cart', cartSchema);
 
 module.exports = Cart;
