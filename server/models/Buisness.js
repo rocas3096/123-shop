@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-const buissnessSchema = new Schema({
-  buissness_name: {
+const buisnessSchema = new Schema({
+  buisness_name: {
     type: String,
     required: true,
   },
@@ -21,6 +21,6 @@ const buissnessSchema = new Schema({
   },
 });
 
-const Buissness = model('Buissness', buissnessSchema);
+const Buisness = model('Buisness', buisnessSchema);
 
-module.exports = Buissness;
+module.exports = Buisness;
