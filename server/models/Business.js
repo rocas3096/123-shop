@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-const buissnessSchema = new Schema({
-  buissness_name: {
+const businessSchema = new Schema({
+  business_name: {
     type: String,
     required: true,
   },
@@ -12,15 +12,15 @@ const buissnessSchema = new Schema({
   address: {
     type: String,
     validate: {
-      validator: function(value) {
+      validator: function (value) {
         const addressPattern = /^[a-zA-Z0-9\s,'-]*$/;
         return addressPattern.test(value);
       },
-      message: props => `${props.value} is not a valid address!`,
+      message: (props) => `${props.value} is not a valid address!`,
     },
   },
 });
 
-const Buissness = model('Buissness', buissnessSchema);
+const Business = model("Business", businessSchema);
 
-module.exports = Buissness;
+module.exports = Business;
