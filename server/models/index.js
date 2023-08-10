@@ -1,4 +1,6 @@
-// One-to-Many Relationship (User - Business)
-// One-to-Many Relationship (Business - Product)
-// One-to-Many Relationship (User - Cart)
-// One-to-Many Relationship (User - Order)
+const User = require('./User');
+const Product = require('./Product');
+const Cart = require('./Cart');
+const Business = require('./Business');
+
+module.exports = { User, Product, Cart, Business };
