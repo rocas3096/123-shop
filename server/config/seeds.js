@@ -1,21 +1,13 @@
 const db = require("./connection");
-const {
-  User,
-  Product,
-  Business,
-  Cart,
-  CartItem,
-  Order,
-  OrderItem,
-} = require("../models");
+const { User, Product, Business, Cart } = require("../models");
 
 db.once("open", async () => {
-  // Delete existing data
-  await User.deleteMany();
-  await Product.deleteMany();
-  await Business.deleteMany();
-  await Cart.deleteMany();
-  await Order.deleteMany();
+  await Promise.all([
+    User.deleteMany(),
+    Product.deleteMany(),
+    Business.deleteMany(),
+    Cart.deleteMany(),
+  ]);
 
   // Insert sample data
   const users = await User.insertMany([
@@ -94,68 +86,10 @@ db.once("open", async () => {
     },
   ]);
 
-  const products = await Product.insertMany([
-    // Product data
-    {
-      product_name: "T-shirt",
-      product_description: "Comfortable cotton t-shirt",
-      price: 19.99,
-      quantity: 100,
-    },
-    {
-      product_name: "Jeans",
-      product_description: "Classic denim jeans",
-      price: 49.99,
-      quantity: 50,
-    },
-    {
-      product_name: "Sneakers",
-      product_description: "Stylish athletic sneakers",
-      price: 69.99,
-      quantity: 75,
-    },
-    {
-      product_name: "Backpack",
-      product_description: "Durable and spacious backpack",
-      price: 29.99,
-      quantity: 60,
-    },
-    {
-      product_name: "Watch",
-      product_description: "Elegant wristwatch",
-      price: 99.99,
-      quantity: 30,
-    },
-    {
-      product_name: "Laptop",
-      product_description: "High-performance laptop",
-      price: 999.99,
-      quantity: 20,
-    },
-    {
-      product_name: "Headphones",
-      product_description: "Wireless over-ear headphones",
-      price: 149.99,
-      quantity: 40,
-    },
-    {
-      product_name: "Smartphone",
-      product_description: "Latest smartphone model",
-      price: 699.99,
-      quantity: 25,
-    },
-    {
-      product_name: "Sunglasses",
-      product_description: "UV protection sunglasses",
-      price: 39.99,
-      quantity: 80,
-    },
-  ]);
-
   const businesses = await Business.insertMany([
     // Business data
     {
-      name: "Electronics Emporium",
+      business_name: "Electronics Emporium",
       description: "Your one-stop shop for electronics",
       address: "123 Main Street",
       phone_number: "555-123-4567",
@@ -165,7 +99,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Fashion Frenzy",
+      business_name: "Fashion Frenzy",
       description: "Trendy fashion store",
       address: "456 Fashion Avenue",
       phone_number: "555-987-6543",
@@ -175,7 +109,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Home Essentials",
+      business_name: "Home Essentials",
       description: "Everything you need for your home",
       address: "789 Homeware Street",
       phone_number: "555-456-7890",
@@ -185,7 +119,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Outdoor Adventures",
+      business_name: "Outdoor Adventures",
       description: "Outdoor gear and equipment",
       address: "234 Outdoor Way",
       phone_number: "555-789-0123",
@@ -195,7 +129,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Book Haven",
+      business_name: "Book Haven",
       description: "Wide selection of books",
       address: "567 Book Street",
       phone_number: "555-234-5678",
@@ -205,7 +139,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Sports Galore",
+      business_name: "Sports Galore",
       description: "Sports equipment and apparel",
       address: "890 Sports Avenue",
       phone_number: "555-567-8901",
@@ -215,7 +149,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Pet Paradise",
+      business_name: "Pet Paradise",
       description: "Supplies for your furry friends",
       address: "123 Pet Lane",
       phone_number: "555-901-2345",
@@ -225,7 +159,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Beauty Bliss",
+      business_name: "Beauty Bliss",
       description: "Beauty and skincare products",
       address: "456 Beauty Street",
       phone_number: "555-345-6789",
@@ -235,7 +169,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
-      name: "Gourmet Delights",
+      business_name: "Gourmet Delights",
       description: "Delicious gourmet food and treats",
       address: "789 Gourmet Avenue",
       phone_number: "555-678-9012",
@@ -243,6 +177,73 @@ db.once("open", async () => {
       password: "gourmetpass123",
       products: [],
       orders: [],
+    },
+  ]);
+
+  const products = await Product.insertMany([
+    // Product data
+    {
+      business_id: businesses[0]._id,
+      product_name: "T-shirt",
+      product_description: "Comfortable cotton t-shirt",
+      price: 19.99,
+      quantity: 100,
+    },
+    {
+      business_id: businesses[1]._id,
+      product_name: "Jeans",
+      product_description: "Classic denim jeans",
+      price: 49.99,
+      quantity: 50,
+    },
+    {
+      business_id: businesses[2]._id,
+      product_name: "Sneakers",
+      product_description: "Stylish athletic sneakers",
+      price: 69.99,
+      quantity: 75,
+    },
+    {
+      business_id: businesses[3]._id,
+      product_name: "Backpack",
+      product_description: "Durable and spacious backpack",
+      price: 29.99,
+      quantity: 60,
+    },
+    {
+      business_id: businesses[4]._id,
+      product_name: "Watch",
+      product_description: "Elegant wristwatch",
+      price: 99.99,
+      quantity: 30,
+    },
+    {
+      business_id: businesses[5]._id,
+      product_name: "Laptop",
+      product_description: "High-performance laptop",
+      price: 999.99,
+      quantity: 20,
+    },
+    {
+      business_id: businesses[6]._id,
+      product_name: "Headphones",
+      product_description: "Wireless over-ear headphones",
+      price: 149.99,
+      quantity: 40,
+    },
+    {
+      business_id: businesses[7]._id,
+      product_name: "Smartphone",
+      product_description: "Latest smartphone model",
+      price: 699.99,
+      quantity: 25,
+    },
+    {
+      business_id: businesses[8]._id,
+      product_name: "Sunglasses",
+      product_description: "UV protection sunglasses",
+      price: 39.99,
+      quantity: 80,
     },
   ]);
 
@@ -256,194 +257,68 @@ db.once("open", async () => {
           quantity: 2,
         },
       ],
-      totalAmount: 39.98,
     },
     {
-      user: users[1]._id,
+      user: users[0]._id,
       item: [
         {
           product: products[1]._id,
           quantity: 3,
         },
       ],
-      totalAmount: 149.97,
     },
     {
-      user: users[2]._id,
+      user: users[0]._id,
       item: [
         {
           product: products[2]._id,
           quantity: 1,
         },
       ],
-      totalAmount: 69.99,
     },
-    {
-      user: users[3]._id,
-      item: [
-        {
-          product: products[3]._id,
-          quantity: 2,
-        },
-      ],
-      totalAmount: 39.98,
-    },
-    {
-      user: users[4]._id,
-      item: [
-        {
-          product: products[4]._id,
-          quantity: 1,
-        },
-      ],
-      totalAmount: 99.99,
-    },
-    {
-      user: users[5]._id,
-      item: [
-        {
-          product: products[5]._id,
-          quantity: 1,
-        },
-      ],
-      totalAmount: 999.99,
-    },
-    {
-      user: users[6]._id,
-      item: [
-        {
-          product: products[6]._id,
-          quantity: 2,
-        },
-      ],
-      totalAmount: 299.98,
-    },
-    {
-      user: users[7]._id,
-      item: [
-        {
-          product: products[7]._id,
-          quantity: 3,
-        },
-      ],
-      totalAmount: 449.97,
-    },
-    {
-      user: users[8]._id,
-      item: [
-        {
-          product: products[8]._id,
-          quantity: 1,
-        },
-      ],
-      totalAmount: 39.99,
-    },
-  ]);
-
-  const orders = await Order.insertMany([
-    // Order data
     {
       user: users[1]._id,
       item: [
         {
-          product: products[1]._id,
-          quantity: 3,
-        },
-      ],
-      business: businesses[0]._id,
-      total: 59.97,
-    },
-    {
-      user: users[2]._id,
-      item: [
-        {
-          product: products[2]._id,
+          product: products[3]._id,
           quantity: 2,
         },
-        {
-          product: products[3]._id,
-          quantity: 1,
-        },
       ],
-      business: businesses[1]._id,
-      total: 119.97,
     },
     {
-      user: users[3]._id,
+      user: users[1]._id,
       item: [
         {
           product: products[4]._id,
-          quantity: 1,
+          quantity: 4,
         },
-      ],
-      business: businesses[2]._id,
-      total: 99.99,
-    },
-    {
-      user: users[4]._id,
-      item: [
         {
           product: products[5]._id,
           quantity: 1,
         },
       ],
-      business: businesses[3]._id,
-      total: 999.99,
     },
     {
-      user: users[5]._id,
+      user: users[2]._id,
       item: [
         {
           product: products[6]._id,
           quantity: 2,
         },
       ],
-      business: businesses[4]._id,
-      total: 299.98,
     },
     {
-      user: users[6]._id,
+      user: users[2]._id,
       item: [
         {
           product: products[7]._id,
+          quantity: 1,
+        },
+        {
+          product: products[8]._id,
           quantity: 3,
         },
       ],
-      business: businesses[5]._id,
-      total: 449.97,
-    },
-    {
-      user: users[7]._id,
-      item: [
-        {
-          product: products[8]._id,
-          quantity: 1,
-        },
-      ],
-      business: businesses[6]._id,
-      total: 39.99,
-    },
-    {
-      user: users[8]._id,
-      item: [
-        {
-          product: products[9]._id,
-          quantity: 2,
-        },
-      ],
-      business: businesses[7]._id,
-      total: 99.98,
-    },
-    {
-      user: users[9]._id,
-      item: [
-        {
-          product: products[10]._id,
-          quantity: 1,
-        },
-      ],
-      business: businesses[8]._id,
-      total: 149.99,
     },
   ]);
 
@@ -454,7 +329,7 @@ db.once("open", async () => {
   }
 
   for (const user of users) {
-    user.orders.push(...orders);
+    user.orders.push(...carts);
     await user.save();
   }
 
