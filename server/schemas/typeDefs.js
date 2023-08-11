@@ -109,6 +109,8 @@ const typeDefs = gql`
   type Mutation {
     createUser(userInput: CreateUserInput!): User
     createProduct(productInput: CreateProductInput!): Product
+    createBusiness(input: AddBusinessInput!): Business!
+    updateBusinessAddress(input: UpdateBusinessInput!): Business!
     addToCart(input: AddToCartInput!): Cart
     updateBusiness(input: UpdateBusinessInput!): Business
     addBusiness(input: AddBusinessInput!): Business
