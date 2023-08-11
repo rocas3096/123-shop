@@ -19,6 +19,7 @@ const businessSchema = new Schema({
       message: (props) => `${props.value} is not a valid address!`,
     },
   },
+  products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
 });
 
 const Business = model("Business", businessSchema);
