@@ -27,24 +27,24 @@ Open your terminal and direct into the 123-Shop folder
 Run this command in your terminal:
 
 ```
-npm install
-
-or
-
-pnpm install
+npm run install
 ```
 
 ## Usage
 
-To use the application, run: 
+To use the application, seed the database: 
 
 ```
-npm start
-
-or 
-
-pnpm start
+npm run seed
 ```
+
+Then, you can start the server:
+
+```
+npm run start
+```
+
+Navigate to your preferred browser and go to the link that is posted in your terminal (https://localhost:3001/graphql).
 
 ## Contributors
 
