@@ -9,6 +9,7 @@ module.exports = {
         tertiary: "#0085FF",
         error: "#FF2F09",
         success: "#10FF70",
+        white: "#fff",
       },
       backgroundColor: {
         primary: "#FFFFFF",
