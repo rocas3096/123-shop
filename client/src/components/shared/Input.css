@@ -1,0 +1,47 @@
+.Input {
+  position: relative;
+}
+.Input-item {
+  border: 1px solid rgba(0, 0, 0, 40%);
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 16px;
+}
+.Input-label {
+  position: absolute;
+  left: -2px;
+  top: 50%;
+
+  font-weight: 600;
+
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  pointer-events: none;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  opacity: 0;
+  transition: 0.1s;
+}
+.Input-item:focus + .Input-label {
+  left: 10px;
+  top: 0px;
+  font-size: 12px;
+  opacity: 1;
+  transition: 0.1s;
+}
+.Input-item:focus::placeholder {
+  opacity: 0;
+}
+.Input-textarea {
+  border: 1px solid rgba(0, 0, 0, 40%);
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 16px;
+  width: 100%;
+}

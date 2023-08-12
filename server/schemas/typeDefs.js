@@ -100,6 +100,7 @@ const typeDefs = gql`
   }
 
   type Query {
+    getAllUsers: [User!]!
     getUser(userId: ID!): User
     getProducts: [Product!]!
     getCartByUser(userId: ID!): Cart

@@ -6,4 +6,37 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Inter";
+}
+
+.fade {
+  animation: fadeIn 0.4s ease-in-out;
+}
+.hover-link {
+  position: relative;
+}
+.hover-link::before {
+  content: "";
+  position: absolute;
+  transition: 0.3s;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  width: 0%;
+  height: 1px;
+}
+/* .hover-link:hover {
+  transition: 0.3s;
+} */
+.hover-link:hover::before {
+  transition: 0.3s;
+  width: 100%;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
