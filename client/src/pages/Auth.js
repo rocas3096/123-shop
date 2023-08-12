@@ -38,6 +38,10 @@ function Auth() {
             <span className="block text-sm font-medium text-slate-700">Business Phone Number</span>
             <input className="w-full border-slate-200 border p-2 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"/>
           </label>
+          <label className="block p-2">
+            <span className="block text-sm font-medium text-slate-700">Business Phone Number</span>
+            <input className="w-full border-slate-200 border p-2 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"/>
+          </label>
         </form>
         <div className="flex mx-5 p-2 justify-end">
         <button className="bg-secondary p-2 text-white mb-auto">Next</button>
