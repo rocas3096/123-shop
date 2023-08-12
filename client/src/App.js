@@ -18,14 +18,7 @@ function App() {
         </NavLink>
       </nav>
 
-      <div className="flex-grow">
-        <Outlet />
-      </div>
-
-
-      <footer className="bg-gray-100 mt-auto">
-        <h1>Footer</h1>
-      </footer>
+      <Outlet />
     </div>
   );
 }
