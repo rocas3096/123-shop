@@ -89,6 +89,7 @@ db.once("open", async () => {
   const businesses = await Business.insertMany([
     // Business data
     {
+      user_id: users[0]._id,
       business_name: "Electronics Emporium",
       description: "Your one-stop shop for electronics",
       address: "123 Main Street",
@@ -99,6 +100,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[1]._id,
       business_name: "Fashion Frenzy",
       description: "Trendy fashion store",
       address: "456 Fashion Avenue",
@@ -109,6 +111,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[2]._id,
       business_name: "Home Essentials",
       description: "Everything you need for your home",
       address: "789 Homeware Street",
@@ -119,6 +122,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[3]._id,
       business_name: "Outdoor Adventures",
       description: "Outdoor gear and equipment",
       address: "234 Outdoor Way",
@@ -129,6 +133,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[4]._id,
       business_name: "Book Haven",
       description: "Wide selection of books",
       address: "567 Book Street",
@@ -139,6 +144,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[5]._id,
       business_name: "Sports Galore",
       description: "Sports equipment and apparel",
       address: "890 Sports Avenue",
@@ -149,6 +155,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[6]._id,
       business_name: "Pet Paradise",
       description: "Supplies for your furry friends",
       address: "123 Pet Lane",
@@ -159,6 +166,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[7]._id,
       business_name: "Beauty Bliss",
       description: "Beauty and skincare products",
       address: "456 Beauty Street",
@@ -169,6 +177,7 @@ db.once("open", async () => {
       orders: [],
     },
     {
+      user_id: users[8]._id,
       business_name: "Gourmet Delights",
       description: "Delicious gourmet food and treats",
       address: "789 Gourmet Avenue",
