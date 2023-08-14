@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { brandLogo } from "../assets/svg/svg";
+import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="flex items-center justify-between w-full p-3 bg-secondary">
+    <nav className="Navbar flex items-center justify-between w-full p-3 bg-secondary">
       <NavLink to="/" className="logo-brand">
         {brandLogo}
       </NavLink>
