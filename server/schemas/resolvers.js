@@ -1,9 +1,11 @@
 const { Business, Cart, Product, User } = require("../models");
-
+const jwt = require("jsonwebtoken");
+const { signToken, authToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     getAllUsers: async () => {
       const users = await User.find({});
+
       return users;
     },
     // GET user by ID
@@ -26,21 +28,87 @@ const resolvers = {
     // GET business by ID
     getBusiness: async (_, { businessId }) => {
       const business = await Business.findById(businessId);
-      return business;
+      return business.populate("products");
+    },
+    getBusinessByUser: async (_, { userId }) => {
+      let foundBusiness = await Business.find({ user_id: userId });
+      return foundBusiness;
+    },
+    getAllBusiness: async () => {
+      const allBusiness = await Business.find({});
+      return allBusiness;
+    },
+    authUser: async (_, { token }) => {
+      try {
+        let decodedToken = authToken(token);
+        if (!decodedToken) {
+          return { authed: false, userId: null };
+        }
+        return { authed: true, userId: decodedToken.data._id };
+      } catch (error) {
+        throw new Error("Auth failed resolvers.js ln:42");
+      }
     },
   },
+
   Mutation: {
+    // POST login user
+    loginUser: async (_, { email, password }) => {
+      let errMsg = "";
+      try {
+        const user = await User.findOne({ email });
+        if (!user) {
+          errMsg = "Incorrect details";
+          throw new Error({ message: "Incorrect details" });
+        }
+        const passwordAuthed = await user.isCorrectPassword(password);
+        if (!passwordAuthed) {
+          errMsg = "Incorrect details";
+          throw new Error({ message: "Incorrect details" });
+        }
+        return signToken(user);
+      } catch (error) {
+        throw new Error(errMsg);
+      }
+    },
     // POST new User
     createUser: async (_, { userInput }) => {
-      const user = new User(userInput);
-      await user.save();
-      return user;
+      console.log({ userInput });
+      try {
+        const foundUser = await User.findOne({ email: userInput.email });
+        if (foundUser) {
+          throw new Error("Incorrect credentials");
+        }
+        const user = new User(userInput);
+        let token;
+        user.userInput = userInput;
+        await user.save();
+        if (user) {
+          token = signToken(user);
+        }
+
+        return token;
+      } catch (error) {
+        let err = error.message || "Error creating a user";
+        throw new Error(error);
+      }
     },
+
     // POST new Product
     createProduct: async (_, { productInput }) => {
-      const product = new Product(productInput);
-      await product.save();
-      return product;
+      try {
+        const product = new Product(productInput);
+        const business = await Business.findById(productInput.business_id);
+        if (!business) {
+          throw new Error("No business here");
+        }
+        await product.save();
+        business.products.push(product);
+        await business.save();
+        return product;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
     //
     addToCart: async (_, { userId, productId, quantity }) => {

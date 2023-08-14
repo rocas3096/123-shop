@@ -1,0 +1,31 @@
+.scrollable-container {
+  background-color: white;
+  position: relative;
+  z-index: 50;
+  height: 400px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+.item {
+  background-color: green;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.inventory.desktop {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.inventory-title {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 5%);
+  z-index: 100;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+@media screen and (max-width: 590px) {
+  .inventory.desktop {
+    display: none;
+  }
+}
