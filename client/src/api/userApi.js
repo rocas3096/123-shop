@@ -13,6 +13,7 @@ export const GET_USER_BY_ID = gql`
     }
   }
 `;
+
 export const GET_BUSINESS_BY_USER_ID = gql`
   query GetBusinessByUser($userId: ID!) {
     getBusinessByUser(userId: $userId) {
@@ -56,6 +57,16 @@ export const LOGIN_USER = gql`
   mutation LoginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
       token
+    }
+  }
+`;
+export const CREATE_BULK_PRODUCTS = gql`
+  mutation CreateMultipleProducts($productInput: CreateProductsInput!) {
+    createMultipleProducts(productInput: $productInput) {
+      _id
+      product_name
+      product_description
+      price
     }
   }
 `;

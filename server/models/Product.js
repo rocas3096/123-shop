@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const productSchema = Schema({
+const productSchema = new Schema({
   business_id: {
     type: Schema.Types.ObjectId,
     ref: "Business",

@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import {
@@ -9,7 +9,13 @@ import {
 } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 import Auth from "./pages/Auth";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+  split,
+} from "@apollo/client";
 import { AuthContextProvider } from "./context/authFormContext";
 import PrivateRoute from "./components/shared/PrivateRoute";
 import { AuthUserContextProvider } from "./context/authUserContext";
@@ -17,8 +23,12 @@ import AddProducts from "./pages/AddProducts";
 import VendorTemplate from "./pages/VendorTemplate";
 import VendorSetup from "./pages/VendorSetup";
 import { DrawersContextProvider } from "./context/drawersContext";
+
 import Home from "./pages/Home";
+import { WebSocketLink } from "apollo-link-ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 const path = window.location.pathname;
+
 const client = new ApolloClient({
   uri: "http://localhost:3001/graphql",
   cache: new InMemoryCache(),
@@ -26,7 +36,7 @@ const client = new ApolloClient({
 
 const router = createBrowserRouter([
   {
-    path: "/", 
+    path: "/",
     element: <App />,
     children: [
       {

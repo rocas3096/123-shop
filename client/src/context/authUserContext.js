@@ -14,7 +14,7 @@ export const AuthUserContextProvider = ({ children }) => {
   let [userAuthed, setUserAuthed] = useState(false);
   const { loading, error, data } = useQuery(AUTH_USER, {
     variables: {
-      token,
+      token: token && token,
     },
   });
   const {
@@ -42,7 +42,6 @@ export const AuthUserContextProvider = ({ children }) => {
     fn(path);
     window.location.reload(false);
   };
-  console.log(business_error);
   return (
     <authUserContext.Provider
       value={{

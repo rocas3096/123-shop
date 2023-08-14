@@ -19,7 +19,17 @@ const typeDefs = gql`
     price: Float!
     quantity: Int!
   }
-
+  type Order {
+    _id: ID!
+    user: ID!
+    business: ID!
+    orderDetails: [OrderItem!]!
+  }
+  type OrderItem {
+    item: String!
+    quantity: Int!
+    price: Float!
+  }
   type Business {
     _id: ID!
     user_id: ID!
@@ -41,20 +51,6 @@ const typeDefs = gql`
   }
 
   type CartItem {
-    _id: ID!
-    product: Product
-    quantity: Int!
-  }
-
-  type Order {
-    _id: ID!
-    user: User!
-    item: [OrderItem]
-    business: Business
-    total: Float!
-  }
-
-  type OrderItem {
     _id: ID!
     product: Product
     quantity: Int!
@@ -88,7 +84,17 @@ const typeDefs = gql`
     address: String
     newVendorUser: Boolean
   }
-
+  input InputOrderItem {
+    item: String!
+    quantity: Int!
+    price: Float!
+  }
+  input ProductInput {
+    product_name: String!
+    product_description: String!
+    price: Float!
+    quantity: Int
+  }
   input CreateProductInput {
     business_id: ID!
     product_name: String!
@@ -96,7 +102,10 @@ const typeDefs = gql`
     price: Float!
     quantity: Int
   }
-
+  input CreateProductsInput {
+    business_id: ID!
+    products: [ProductInput!]!
+  }
   input AddToCartInput {
     userId: ID!
     productId: ID!
@@ -129,13 +138,35 @@ const typeDefs = gql`
   type Mutation {
     createUser(userInput: CreateUserInput!): Auth
     createProduct(productInput: CreateProductInput!): Product
+    createMultipleProducts(productInput: CreateProductsInput!): [Product!]!
     loginUser(email: String!, password: String!): Token!
     createBusiness(input: AddBusinessInput!): Business!
     updateBusinessAddress(input: UpdateBusinessInput!): Business!
     addToCart(input: AddToCartInput!): Cart
     updateBusiness(input: UpdateBusinessInput!): Business
     addBusiness(input: AddBusinessInput!): Business
+    placeOrder(
+      userId: ID!
+      businessId: ID!
+      orderDetails: [InputOrderItem!]!
+    ): Order!
+  }
+  type Subscription {
+    newOrder(businessId: ID!): Order
   }
 `;
 
 module.exports = typeDefs;
+//  type Order {
+//     _id: ID!
+//     user: User!
+//     item: [OrderItem]
+//     business: Business
+//     total: Float!
+//   }
+
+//   type OrderItem {
+//     _id: ID!
+//     product: Product
+//     quantity: Int!
+//   }

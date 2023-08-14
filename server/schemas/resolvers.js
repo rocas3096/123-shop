@@ -1,6 +1,10 @@
 const { Business, Cart, Product, User } = require("../models");
 const jwt = require("jsonwebtoken");
 const { signToken, authToken } = require("../utils/auth");
+const { default: mongoose } = require("mongoose");
+const { Order } = require("../models/Order");
+const { PubSub, withFilter } = require("graphql-subscriptions");
+const pubsub = new PubSub();
 const resolvers = {
   Query: {
     getAllUsers: async () => {
@@ -110,6 +114,32 @@ const resolvers = {
         throw new Error(error);
       }
     },
+    createMultipleProducts: async (_, { productInput }) => {
+      const ObjectId = mongoose.Types.ObjectId;
+      const business_id = new ObjectId(productInput.business_id);
+
+      const productsWithBusinessId = productInput.products.map((item) => {
+        return {
+          ...item,
+          business_id,
+        };
+      });
+      try {
+        let products = await Product.insertMany(productsWithBusinessId);
+        let business = await Business.findById(productInput.business_id);
+        let user = await User.findById(business.user_id);
+        products.forEach((product) => {
+          business.products.push(product);
+        });
+        user.first_time_log = false;
+        user.save();
+        business.save();
+
+        return products;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
     //
     addToCart: async (_, { userId, productId, quantity }) => {
       let cart = await Cart.findOne({ user: userId });
@@ -147,6 +177,27 @@ const resolvers = {
         { new: true }
       );
       return updatedBusiness;
+    },
+    placeOrder: async (_, { userId, businessId, orderDetails }) => {
+      const newOrder = new Order({
+        user: userId,
+        business: businessId,
+        orderDetails,
+      });
+      const savedOrder = await newOrder.save();
+      console.log({ savedOrder });
+      pubsub.publish("NEW_ORDER", { newOrder: savedOrder });
+      return savedOrder;
+    },
+  },
+  Subscription: {
+    newOrder: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(["NEW_ORDER"]),
+        (payload, variables) => {
+          return payload.newOrder.business.toString() === variables.businessId;
+        }
+      ),
     },
   },
 };

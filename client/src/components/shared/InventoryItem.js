@@ -3,7 +3,14 @@ import "./InventoryItem.css";
 import Update from "./Update";
 import Trash from "./Trash";
 import Loading from "./Loading";
-function InventoryItem({ id, title, price, description, updateProduct }) {
+function InventoryItem({
+  id,
+  title,
+  price,
+  description,
+  updateProduct,
+  deleteProduct,
+}) {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [editFormData, setEditFormData] = useState({
@@ -11,6 +18,7 @@ function InventoryItem({ id, title, price, description, updateProduct }) {
     price,
     product_description: description,
   });
+  const [remove, setRemove] = useState(false);
   useEffect(() => {
     setEditFormData({
       product_name: title,
@@ -45,8 +53,23 @@ function InventoryItem({ id, title, price, description, updateProduct }) {
   const handleInput = (e) => {
     console.log(e.target);
   };
+  const handleDelete = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setRemove(true);
+      setTimeout(() => {
+        setRemove(false);
+        deleteProduct(id);
+      }, 300);
+    }, 400);
+  };
   return (
-    <div className={`inventory-item ${editMode && "edit-mode"}`}>
+    <div
+      className={`inventory-item ${editMode && "edit-mode"} ${
+        remove && "remove"
+      }`}
+    >
       <Loading
         border={4}
         width={28}
@@ -55,7 +78,7 @@ function InventoryItem({ id, title, price, description, updateProduct }) {
         active={loading}
       />
       <div className="inventory-item-image">
-        <img src={`https://source.unsplash.com/100x140?${title}`} alt="" />
+        <img src={`https://source.unsplash.com/featured?${title}`} alt="" />
       </div>
       <div className="inventory-item-content">
         <div className="inventory-item-content-title">
@@ -74,7 +97,8 @@ function InventoryItem({ id, title, price, description, updateProduct }) {
           )}
 
           <p className="title-price">
-            $
+            <span className="dollar-sign">$</span>
+
             {editMode ? (
               <input
                 onChange={handleChange}
@@ -111,7 +135,7 @@ function InventoryItem({ id, title, price, description, updateProduct }) {
               <button onClick={toggleEditMode}>
                 <Update width="16px" height="16px" />
               </button>
-              <button>
+              <button onClick={handleDelete}>
                 <Trash width="16px" height="18px" />
               </button>
             </>

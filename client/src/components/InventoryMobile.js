@@ -2,7 +2,11 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./InventoryMobile.css";
 import { DrawersContext } from "../context/drawersContext";
 import Exit from "./shared/Exit";
-function InventoryMobile({ isActive }) {
+import InventoryItem from "./shared/InventoryItem";
+function InventoryMobile({ products, updateProduct, deleteProduct }) {
+  const handleSave = () => {
+    console.log(products);
+  };
   const { setupInvActive, setSetupInvActive, toggleBackdrop } =
     useContext(DrawersContext);
   const [loading, setLoading] = useState(true);
@@ -45,7 +49,9 @@ function InventoryMobile({ isActive }) {
           hideToggler && "hide"
         }`}
       >
-        <h2 className="text-center ">View Current Inventory (23)</h2>
+        <h2 className="text-center ">
+          View Current Inventory ({products.length})
+        </h2>
       </div>
       <div className={`inventory mobile ${setupInvActive && "active"}`}>
         <div className="text-white bg-secondary inventory-mobile-header">
@@ -60,15 +66,21 @@ function InventoryMobile({ isActive }) {
           </div>
         </div>
         <div className="scrollable-container">
-          <div className="item">ITEM !</div>
-          <div className="item">ITEM !</div>
-          <div className="item">ITEM !</div>
-          <div className="item">ITEM !</div>
-          <div className="item">ITEM !</div>
+          {products.map((product) => (
+            <InventoryItem
+              key={product.id}
+              id={product.id}
+              title={product.product_name}
+              description={product.product_description}
+              price={product.price}
+              updateProduct={updateProduct}
+              deleteProduct={deleteProduct}
+            />
+          ))}
         </div>
         <div className="inventory-footer">
           <button className="text-white bg-secondary start-selling">
-            Start Selling →
+            Save & Start Selling →
           </button>
         </div>
       </div>
