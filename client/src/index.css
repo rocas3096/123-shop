@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --input-border-active: #0085ff;
+  --input-border-shadow: rgba(0, 133, 255, 40%);
+  --border: rgba(0, 0, 0, 20%);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+  scrollbar-color: #555 #f1f1f1;
+}
+
+.fade {
+  animation: fadeIn 0.4s ease-in-out;
+}
+.hover-link {
+  position: relative;
+}
+.hover-link::before {
+  content: "";
+  position: absolute;
+  transition: 0.3s;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  width: 0%;
+  height: 1px;
+}
+.no-scroll {
+  overflow: hidden;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition-delay: 9999s;
+  transition-delay: 9999s;
+}
+/* Scrollbar container */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Scroll thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Scroll track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  padding: 5px;
+}
+/* .hover-link:hover {
+  transition: 0.3s;
+} */
+.hover-link:hover::before {
+  transition: 0.3s;
+  width: 100%;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

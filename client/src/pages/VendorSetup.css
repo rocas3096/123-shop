@@ -1,0 +1,89 @@
+.VendorSetup {
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  align-items: start;
+  padding: 0 60px;
+  width: 1300px;
+  max-width: 100%;
+  margin: 0 auto;
+  column-gap: 10px;
+
+  margin-top: 30px;
+}
+.start-selling {
+  display: block;
+  padding: 10px;
+  width: 250px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.inventory-footer {
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 5%);
+  z-index: 100;
+  position: relative;
+  background-color: white;
+  padding: 20px 0;
+}
+.price-and-btn {
+  display: grid;
+  grid-template-columns: 180px 136px;
+  column-gap: 5px;
+}
+
+.add-btn {
+  background-color: #0085ff;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .VendorSetup {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 863px) {
+  .VendorSetup {
+    padding: 0 30px;
+  }
+}
+@media screen and (max-width: 811px) {
+  .VendorSetup {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+
+    max-width: 100%;
+    row-gap: 20px;
+
+    margin-top: 30px;
+  }
+}
+.modal-bd {
+  background-color: rgba(0, 0, 0, 0.644);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  backdrop-filter: blur(5px);
+  opacity: 0;
+}
+.modal-bd.active {
+  opacity: 1;
+}
+@media screen and (max-width: 457px) {
+  .price-and-btn {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
+  .VendorSetup {
+    padding: 0;
+    width: 95%;
+  }
+}

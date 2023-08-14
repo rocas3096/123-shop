@@ -1,0 +1,29 @@
+.Navbar {
+    position: fixed;
+}
+.auth-links {
+  display: flex;
+}
+
+.auth-links.mobile {
+  display: none;
+}
+@media screen and (max-width: 579px) {
+  .auth-links.desktop {
+    display: none;
+  }
+  .auth-links.mobile {
+    display: block;
+  }
+  .auth-links.mobile > .navbar-toggler {
+    background-color: black;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
