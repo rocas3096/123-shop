@@ -30,7 +30,7 @@ import { getMainDefinition } from "@apollo/client/utilities";
 const path = window.location.pathname;
 
 const client = new ApolloClient({
-  uri: "http://localhost:3001/graphql",
+  uri: "/graphql",
   cache: new InMemoryCache(),
 });
 
