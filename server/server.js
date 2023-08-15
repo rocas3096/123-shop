@@ -14,7 +14,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
-  uri: "https://shop--123-f2fa6ddf19c1.herokuapp.com/graphql",
+  uri: process.env.REACT_APP_GRAPHQL_API_URL,
 });
 
 app.use(express.urlencoded({ extended: false }));
