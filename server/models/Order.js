@@ -1,8 +1,7 @@
 const { Schema, model } = require("mongoose");
 const orderSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+  customer_name: {
+    type: String,
     required: true,
   },
   business: {

@@ -19,12 +19,12 @@ const typeDefs = gql`
     price: Float!
     quantity: Int!
   }
-  type Order {
-    _id: ID!
-    user: ID!
-    business: ID!
-    orderDetails: [OrderItem!]!
-  }
+  # type Order {
+  #   _id: ID!
+  #   user: ID!
+  #   business: ID!
+  #   orderDetails: [OrderItem!]!
+  # }
   type OrderItem {
     item: String!
     quantity: Int!
@@ -145,14 +145,34 @@ const typeDefs = gql`
     addToCart(input: AddToCartInput!): Cart
     updateBusiness(input: UpdateBusinessInput!): Business
     addBusiness(input: AddBusinessInput!): Business
-    placeOrder(
-      userId: ID!
-      businessId: ID!
-      orderDetails: [InputOrderItem!]!
-    ): Order!
+  }
+
+  type OrderDetails {
+    item: String!
+    quantity: Int!
+    price: Int!
+  }
+
+  type Order {
+    customer_name: String!
+    business: ID!
+    orderDetails: [OrderDetails!]!
+  }
+  input OrderDetailsInput {
+    item: String!
+    quantity: Int!
+    price: Int!
+  }
+  input PlaceOrderInput {
+    customer_name: String!
+    business: ID!
+    orderDetails: [OrderDetailsInput!]!
+  }
+  type Mutation {
+    placeOrder(placeOrderInput: PlaceOrderInput): Order!
   }
   type Subscription {
-    newOrder(businessId: ID!): Order
+    orderCreated(businessId: ID!): Order!
   }
 `;
 

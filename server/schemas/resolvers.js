@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { signToken, authToken } = require("../utils/auth");
 const { default: mongoose } = require("mongoose");
 const { Order } = require("../models/Order");
-const { PubSub, withFilter } = require("graphql-subscriptions");
+const { PubSub } = require("graphql-subscriptions");
 const pubsub = new PubSub();
 const resolvers = {
   Query: {
@@ -178,26 +178,29 @@ const resolvers = {
       );
       return updatedBusiness;
     },
-    placeOrder: async (_, { userId, businessId, orderDetails }) => {
-      const newOrder = new Order({
-        user: userId,
-        business: businessId,
-        orderDetails,
+    placeOrder: async (
+      _,
+      { placeOrderInput: { customer_name, business, orderDetails } }
+    ) => {
+      pubsub.publish(`NEW_ORDER_${business}`, {
+        orderCreated: {
+          customer_name,
+          business,
+          orderDetails,
+        },
       });
-      const savedOrder = await newOrder.save();
-      console.log({ savedOrder });
-      pubsub.publish("NEW_ORDER", { newOrder: savedOrder });
-      return savedOrder;
+      return {
+        business,
+        customer_name,
+        orderDetails,
+      };
     },
   },
   Subscription: {
-    newOrder: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator(["NEW_ORDER"]),
-        (payload, variables) => {
-          return payload.newOrder.business.toString() === variables.businessId;
-        }
-      ),
+    orderCreated: {
+      subscribe: (parent, args, context) => {
+        return pubsub.asyncIterator(`NEW_ORDER_${args.businessId}`);
+      },
     },
   },
 };

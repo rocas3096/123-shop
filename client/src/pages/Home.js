@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import HeroFront from "../components/HeroFront";
 import HeroUnder from "../components/HeroUnder";
-import { useSubscription } from "@apollo/client";
-import { NEW_ORDER_SUB } from "../api/orderApi";
+import { gql, useSubscription } from "@apollo/client";
+
+const NEW_ORDER_SUB = gql`
+  subscription Subscription($businessId: ID!) {
+    orderCreated(businessId: $businessId) {
+      business
+      customer_name
+      orderDetails {
+        item
+        quantity
+        price
+      }
+    }
+  }
+`;
 
 function Home() {
-  const { data } = useSubscription(NEW_ORDER_SUB, {
-    variables: { businessId: "64da0831f8ebe6c299619148" },
+  const [orders, setOrders] = useState([]);
+  const { data, loading } = useSubscription(NEW_ORDER_SUB, {
+    variables: { businessId: "2345" },
+    onSubscriptionData: (data) => {
+      const order = data.subscriptionData.data.orderCreated;
+      setOrders((pre) => [order, ...pre]);
+      console.log("ORDER CREATED", order);
+    },
   });
-  console.log({ data });
-  if (data && data.newOrder) {
-    const newOrder = data.newOrder;
-    alert(newOrder);
-  }
   return (
     <div>
-      {data && data.newOrder ? "NEW ORDER" : ""}
+      <div>
+        {orders.map((order) => {
+          return (
+            <>
+              <p>ORDER: {order.business}</p>
+              <p></p>
+            </>
+          );
+        })}
+      </div>
       <HeroFront />
       <HeroUnder />
     </div>

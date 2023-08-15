@@ -35,3 +35,11 @@ export const PLACE_ORDER_MUTATION = gql`
     }
   }
 `;
+const COMMENTS_SUBSCRIPTION = gql`
+  subscription OnCommentAdded($postID: ID!) {
+    commentAdded(postID: $postID) {
+      id
+      content
+    }
+  }
+`;

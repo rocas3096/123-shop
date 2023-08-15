@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/shared/Footer";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_USERS } from "./api/userApi";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { DrawersContext } from "./context/drawersContext";
 
 function App() {
