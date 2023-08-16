@@ -67,7 +67,7 @@ export const GET_ORDERS_BY_BUSINESS = gql`
 `;
 export const GET_ALL_PRODUCTS_BY_BUSINESS = gql`
   query Query($businessId: ID!) {
-    getAllProdcutsByBusiness(businessId: $getAllProdcutsByBusinessBusinessId2) {
+    getAllProdcutsByBusiness(businessId: $businessId) {
       _id
       price
       product_description

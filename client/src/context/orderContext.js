@@ -18,6 +18,7 @@ export const orderContext = createContext({});
 export const OrderProvider = ({ children }) => {
   const { business } = useContext(authUserContext);
   const businessId = business && business.getBusinessByUser[0]._id;
+
   const {
     err: closedOrdersError,
     loading: closedOrdersLoading,

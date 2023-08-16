@@ -51,9 +51,11 @@ const resolvers = {
     authUser: async (_, { token }) => {
       try {
         let decodedToken = authToken(token);
+        console.log({ decodedToken });
         if (!decodedToken) {
           return { authed: false, userId: null };
         }
+        console.log({ decodedToken });
         return { authed: true, userId: decodedToken.data._id };
       } catch (error) {
         throw new Error("Auth failed resolvers.js ln:42");
@@ -76,7 +78,9 @@ const resolvers = {
           errMsg = "Incorrect details";
           throw new Error({ message: "Incorrect details" });
         }
-        return signToken(user);
+        const token = signToken(user);
+        console.log(token);
+        return token;
       } catch (error) {
         throw new Error(errMsg);
       }

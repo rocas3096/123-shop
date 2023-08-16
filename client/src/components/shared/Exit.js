@@ -12,14 +12,14 @@ function Exit({ width, height, stroke }) {
       <path
         d="M5 5.07959L13 12.9996"
         stroke={stroke}
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M5 12.9199L13 4.99991"
         stroke={stroke}
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );

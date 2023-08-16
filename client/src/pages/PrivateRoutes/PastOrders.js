@@ -26,7 +26,14 @@ function PastOrders() {
     <OrderContainer>
       {data &&
         data?.getOrdersByBusiness.map((d) => {
-          return <OrderCard order={d} btnTitle="COMPLETED" completed={true} />;
+          return (
+            <OrderCard
+              key={d._id}
+              order={d}
+              btnTitle="COMPLETED"
+              completed={true}
+            />
+          );
         })}
     </OrderContainer>
   );

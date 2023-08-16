@@ -13,7 +13,7 @@ function Orders() {
     <OrderContainer>
       {orders &&
         orders.map((order) => (
-          <OrderCard order={order} btnTitle="COMPLETE ORDER" />
+          <OrderCard key={order._id} order={order} btnTitle="COMPLETE ORDER" />
         ))}
     </OrderContainer>
   );

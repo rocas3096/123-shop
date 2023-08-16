@@ -29,13 +29,14 @@ import VendorPanel from "./pages/PrivateRoutes/VendorPanel";
 import Orders from "./pages/PrivateRoutes/Orders";
 import { OrderProvider } from "./context/orderContext";
 import PastOrders from "./pages/PrivateRoutes/PastOrders";
+import Products from "./pages/PrivateRoutes/Products";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:3001/graphql",
+  uri: "/graphql",
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:3001/graphql",
+  uri: `ws://${window.location.host}/graphql`,
   options: {
     reconnect: true,
   },
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
           },
           {
             path: "products",
+            element: <Products />,
           },
           {
             path: "account",
