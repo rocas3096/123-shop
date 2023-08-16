@@ -39,6 +39,7 @@ export const AuthUserContextProvider = ({ children }) => {
   };
   const logoutUser = (fn, path) => {
     localStorage.removeItem("_auth");
+    localStorage.removeItem("orders");
     fn(path);
     window.location.reload(false);
   };
@@ -49,6 +50,7 @@ export const AuthUserContextProvider = ({ children }) => {
         loading,
         error,
         data,
+
         globalLoading,
         userAuthed,
         user: user_data && user_data,

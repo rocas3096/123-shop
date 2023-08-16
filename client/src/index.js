@@ -1,28 +1,35 @@
+// packages
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 import {
   RouterProvider,
   createBrowserRouter,
   useLocation,
 } from "react-router-dom";
-import AboutPage from "./pages/AboutPage";
-import Auth from "./pages/Auth";
 import { ApolloClient, HttpLink, InMemoryCache, split } from "@apollo/client";
+// css
+import "./index.css";
+// context
 import { AuthContextProvider } from "./context/authFormContext";
-import PrivateRoute from "./components/shared/PrivateRoute";
 import { AuthUserContextProvider } from "./context/authUserContext";
-import AddProducts from "./pages/AddProducts";
-import VendorTemplate from "./pages/VendorTemplate";
-import VendorSetup from "./pages/VendorSetup";
-import { ApolloProvider } from "@apollo/react-hooks";
 import { DrawersContextProvider } from "./context/drawersContext";
-import Home from "./pages/Home";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { getMainDefinition } from "@apollo/client/utilities";
 
-const path = window.location.pathname;
+// components
+import App from "./App";
+import Auth from "./pages/Auth";
+import PrivateRoute from "./components/shared/PrivateRoute";
+import VendorTemplate from "./pages/PrivateRoutes/VendorTemplate";
+import VendorSetup from "./pages/PrivateRoutes/VendorSetup";
+import Home from "./pages/Home";
+import VendorPanel from "./pages/PrivateRoutes/VendorPanel";
+import Orders from "./pages/PrivateRoutes/Orders";
+import { OrderProvider } from "./context/orderContext";
+import PastOrders from "./pages/PrivateRoutes/PastOrders";
+
 const httpLink = new HttpLink({
   uri: "http://localhost:3001/graphql",
 });
@@ -59,17 +66,35 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
       },
+    ],
+  },
+  {
+    path: "vendor",
+    element: <PrivateRoute component={<VendorTemplate />} navigateTo="/" />,
+    children: [
       {
-        path: "vendor",
-        element: <PrivateRoute component={<VendorTemplate />} navigateTo="/" />,
+        path: "",
+        element: <PrivateRoute component={<VendorPanel />} navigateTo="/" />,
         children: [
           {
-            path: "setup",
-            element: (
-              <PrivateRoute component={<VendorSetup />} navigateTo="/" />
-            ),
+            path: "orders",
+            element: <Orders />,
+          },
+          {
+            path: "past-orders",
+            element: <PastOrders />,
+          },
+          {
+            path: "products",
+          },
+          {
+            path: "account",
           },
         ],
+      },
+      {
+        path: "setup",
+        element: <PrivateRoute component={<VendorSetup />} navigateTo="/" />,
       },
     ],
   },
@@ -84,12 +109,14 @@ root.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
       <AuthUserContextProvider>
-        <AuthContextProvider>
-          <DrawersContextProvider>
-            <RouterProvider router={router} />
-          </DrawersContextProvider>
-        </AuthContextProvider>
+        <OrderProvider>
+          <AuthContextProvider>
+            <DrawersContextProvider>
+              <RouterProvider router={router} />
+            </DrawersContextProvider>
+          </AuthContextProvider>
+        </OrderProvider>
       </AuthUserContextProvider>
-    </React.StrictMode>{" "}
+    </React.StrictMode>
   </ApolloProvider>
 );

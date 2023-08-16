@@ -1,0 +1,15 @@
+.VendorPanelDrawer {
+  background-color: white;
+  padding: 0 20px;
+}
+.VendorPanelDrawer-logo {
+  margin: 0 auto;
+  width: max-content;
+  margin-top: 50px;
+}
+.DrawerLinks {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  margin-top: 70px;
+}

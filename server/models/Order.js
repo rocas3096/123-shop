@@ -9,6 +9,11 @@ const orderSchema = new Schema({
     ref: "Business",
     required: true,
   },
+  status: {
+    type: String,
+    enum: ["OPEN", "CLOSED"],
+    default: "OPEN",
+  },
   orderDetails: [
     {
       item: {

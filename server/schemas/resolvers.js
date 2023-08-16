@@ -42,6 +42,12 @@ const resolvers = {
       const allBusiness = await Business.find({});
       return allBusiness;
     },
+    getOrdersByBusiness: async (_, { businessId, status }) => {
+      return await Order.find({ business: businessId, status });
+    },
+    getAllProdcutsByBusiness: async (_, { businessId }) => {
+      return await Product.find({ business_id: businessId });
+    },
     authUser: async (_, { token }) => {
       try {
         let decodedToken = authToken(token);
@@ -182,18 +188,27 @@ const resolvers = {
       _,
       { placeOrderInput: { customer_name, business, orderDetails } }
     ) => {
+      const newOrder = new Order({
+        customer_name,
+        business,
+        orderDetails,
+      });
+      await newOrder.save();
       pubsub.publish(`NEW_ORDER_${business}`, {
         orderCreated: {
+          _id: newOrder._id,
           customer_name,
           business,
           orderDetails,
         },
       });
-      return {
-        business,
-        customer_name,
-        orderDetails,
-      };
+      return newOrder;
+    },
+    closeOrder: async (_, { orderId }) => {
+      let order = await Order.findById(orderId);
+      order.status = "CLOSED";
+      await order.save();
+      return order;
     },
   },
   Subscription: {

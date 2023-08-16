@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./VendorSetup.css";
 import { v4 as uuid } from "uuid";
-import ProductForm from "../components/ProductForm";
-import InventoryDesktop from "../components/InventoryDesktop";
-import InventoryMobile from "../components/InventoryMobile";
-import { authUserContext } from "../context/authUserContext";
+import ProductForm from "../../components/ProductForm";
+import InventoryDesktop from "../../components/InventoryDesktop";
+import InventoryMobile from "../../components/InventoryMobile";
+import { authUserContext } from "../../context/authUserContext";
 import { useNavigate } from "react-router-dom";
-import WelcomeModal from "../components/WelcomeModal";
-import { DrawersContext } from "../context/drawersContext";
-import { CREATE_BULK_PRODUCTS } from "../api/userApi";
+import WelcomeModal from "../../components/WelcomeModal";
+import { DrawersContext } from "../../context/drawersContext";
+import { CREATE_BULK_PRODUCTS } from "../../api/userApi";
 import { useMutation } from "@apollo/client";
 function VendorSetup() {
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ function VendorSetup() {
           },
         },
       });
-      console.log({ results });
+      navigate("/vendor");
     } catch (error) {
       console.error(error);
     }

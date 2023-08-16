@@ -131,7 +131,9 @@ const typeDefs = gql`
     getCartByUser(userId: ID!): Cart
     getBusiness(businessId: ID!): Business
     getBusinessByUser(userId: ID!): [Business!]!
+    getOrdersByBusiness(businessId: ID!, status: String!): [Order!]!
     getAllBusiness: [Business!]!
+    getAllProdcutsByBusiness(businessId: ID!): [Product!]!
     authUser(token: String!): AuthUser!
   }
 
@@ -143,6 +145,7 @@ const typeDefs = gql`
     createBusiness(input: AddBusinessInput!): Business!
     updateBusinessAddress(input: UpdateBusinessInput!): Business!
     addToCart(input: AddToCartInput!): Cart
+    closeOrder(orderId: ID!): Order!
     updateBusiness(input: UpdateBusinessInput!): Business
     addBusiness(input: AddBusinessInput!): Business
   }
@@ -154,8 +157,10 @@ const typeDefs = gql`
   }
 
   type Order {
+    _id: ID!
     customer_name: String!
     business: ID!
+    status: String!
     orderDetails: [OrderDetails!]!
   }
   input OrderDetailsInput {
