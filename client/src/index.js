@@ -34,15 +34,17 @@ import BusinessResults from "./pages/BusinessResults";
 import BusinessMenu from "./pages/BusinessMenu";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:3001/graphql" || "/graphql",
+  uri: "/graphql",
 });
+// "http://localhost:3001/graphql" || 
 
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:3001/graphql" || `wss://${window.location.host}/graphql`,
+  uri: `wss://${window.location.host}/graphql`,
   options: {
     reconnect: true,
   },
 });
+// "ws://localhost:3001/graphql" || 
 
 const splitLink = split(
   ({ query }) => {
