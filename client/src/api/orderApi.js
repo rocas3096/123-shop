@@ -31,7 +31,7 @@ export const CLOSE_ORDER = gql`
   mutation Mutation($orderId: ID!) {
     closeOrder(orderId: $orderId) {
       _id
-      customer_name
+
       business
       status
       orderDetails {
@@ -46,7 +46,7 @@ export const GET_ORDERS_BY_BUSINESS = gql`
   query Query($businessId: ID!, $status: String!) {
     getOrdersByBusiness(businessId: $businessId, status: $status) {
       _id
-      customer_name
+
       business
       status
       orderDetails {
