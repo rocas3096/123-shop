@@ -1,0 +1,40 @@
+.VendorPanelDrawer-link {
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 15px;
+  transition: 0.2s;
+  position: relative;
+}
+.VendorPanelDrawer-link:hover {
+  background-color: #f3f3f3;
+}
+.num_of_items {
+  font-size: 14px;
+  position: absolute;
+  right: 20px;
+  font-weight: 600;
+}
+.VendorPanelDrawer-link.active {
+  border: 2px solid #0085ff;
+  /* background-color: red; */
+  color: #0085ff;
+  transition: 0.2s;
+}
+.VendorPanelDrawer-link.active:hover {
+  background-color: white;
+}
+.VendorPanelDrawer-link.active .ticket path {
+  stroke: #0085ff;
+}
+.VendorPanelDrawer-link.active .rewind path {
+  fill: #0085ff;
+}
+.VendorPanelDrawer-link.active .product path {
+  stroke: #0085ff;
+}
+.VendorPanelDrawer-link.active .gear path {
+  stroke: #0085ff;
+}

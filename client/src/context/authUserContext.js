@@ -17,6 +17,7 @@ export const AuthUserContextProvider = ({ children }) => {
       token: token && token,
     },
   });
+
   const {
     loading: user_loading,
     error: user_error,
@@ -24,6 +25,7 @@ export const AuthUserContextProvider = ({ children }) => {
   } = useQuery(GET_USER_BY_ID, {
     variables: { userId: data && data.authUser.userId },
   });
+
   const {
     loading: business_loading,
     error: business_error,
@@ -31,6 +33,7 @@ export const AuthUserContextProvider = ({ children }) => {
   } = useQuery(GET_BUSINESS_BY_USER_ID, {
     variables: { userId: data && data.authUser.userId },
   });
+  console.log({ business_data, business_error });
   const loginUser = (token, fn, path) => {
     localStorage.setItem("_auth", token);
     setGlobalLoading(true);
@@ -39,6 +42,7 @@ export const AuthUserContextProvider = ({ children }) => {
   };
   const logoutUser = (fn, path) => {
     localStorage.removeItem("_auth");
+    localStorage.removeItem("orders");
     fn(path);
     window.location.reload(false);
   };
@@ -49,6 +53,7 @@ export const AuthUserContextProvider = ({ children }) => {
         loading,
         error,
         data,
+
         globalLoading,
         userAuthed,
         user: user_data && user_data,

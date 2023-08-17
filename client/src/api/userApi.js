@@ -21,12 +21,6 @@ export const GET_BUSINESS_BY_USER_ID = gql`
       business_name
       description
       address
-      products {
-        _id
-        price
-        product_description
-        product_name
-      }
     }
   }
 `;

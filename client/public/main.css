@@ -905,6 +905,10 @@ video {
   line-height: 1;
 }
 
+.text-\[14px\] {
+  font-size: 14px;
+}
+
 .text-\[24px\] {
   font-size: 24px;
 }
@@ -945,6 +949,10 @@ video {
 
 .font-medium {
   font-weight: 500;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .tracking-tight {
@@ -1003,6 +1011,7 @@ video {
 }
 
 :root {
+  --primary-btn: #0085ff;
   --input-border-active: #0085ff;
   --input-border-shadow: rgba(0, 133, 255, 40%);
   --border: rgba(0, 0, 0, 20%);

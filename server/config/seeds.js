@@ -1,5 +1,6 @@
 const db = require("./connection");
 const { User, Product, Business, Cart } = require("../models");
+const { Order } = require("../models/Order");
 
 db.once("open", async () => {
   await Promise.all([
@@ -7,6 +8,7 @@ db.once("open", async () => {
     Product.deleteMany(),
     Business.deleteMany(),
     Cart.deleteMany(),
+    Order.deleteMany(),
   ]);
 
   // Insert sample data

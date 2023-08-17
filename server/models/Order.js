@@ -1,14 +1,18 @@
 const { Schema, model } = require("mongoose");
 const orderSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+  customer_name: {
+    type: String,
     required: true,
   },
   business: {
     type: Schema.Types.ObjectId,
     ref: "Business",
     required: true,
+  },
+  status: {
+    type: String,
+    enum: ["OPEN", "CLOSED"],
+    default: "OPEN",
   },
   orderDetails: [
     {

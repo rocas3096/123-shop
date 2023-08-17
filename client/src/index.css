@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 :root {
+  --primary-btn: #0085ff;
   --input-border-active: #0085ff;
   --input-border-shadow: rgba(0, 133, 255, 40%);
   --border: rgba(0, 0, 0, 20%);

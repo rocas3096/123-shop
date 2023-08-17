@@ -17,7 +17,7 @@ function Login() {
   const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
   const { loginUser: authLogin } = useContext(authUserContext);
   const [formData, setFormData] = useState(initialFormState);
-  let [err, setErr] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -39,7 +39,6 @@ function Login() {
         authLogin(result.data.loginUser.token, navigate, "/vendor");
       }
     } catch (error) {
-      setErr(error);
       console.error(error);
     }
   };

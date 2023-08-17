@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { authUserContext } from "../context/authUserContext";
+import { authUserContext } from "../../context/authUserContext";
 import { Outlet } from "react-router-dom";
 
 function VendorTemplate() {

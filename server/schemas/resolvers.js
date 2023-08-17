@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { signToken, authToken } = require("../utils/auth");
 const { default: mongoose } = require("mongoose");
 const { Order } = require("../models/Order");
-const { PubSub, withFilter } = require("graphql-subscriptions");
+const { PubSub } = require("graphql-subscriptions");
 const pubsub = new PubSub();
 const resolvers = {
   Query: {
@@ -42,12 +42,20 @@ const resolvers = {
       const allBusiness = await Business.find({});
       return allBusiness;
     },
+    getOrdersByBusiness: async (_, { businessId, status }) => {
+      return await Order.find({ business: businessId, status });
+    },
+    getAllProdcutsByBusiness: async (_, { businessId }) => {
+      return await Product.find({ business_id: businessId });
+    },
     authUser: async (_, { token }) => {
       try {
         let decodedToken = authToken(token);
+        console.log({ decodedToken });
         if (!decodedToken) {
           return { authed: false, userId: null };
         }
+        console.log({ decodedToken });
         return { authed: true, userId: decodedToken.data._id };
       } catch (error) {
         throw new Error("Auth failed resolvers.js ln:42");
@@ -70,7 +78,9 @@ const resolvers = {
           errMsg = "Incorrect details";
           throw new Error({ message: "Incorrect details" });
         }
-        return signToken(user);
+        const token = signToken(user);
+        console.log(token);
+        return token;
       } catch (error) {
         throw new Error(errMsg);
       }
@@ -178,26 +188,38 @@ const resolvers = {
       );
       return updatedBusiness;
     },
-    placeOrder: async (_, { userId, businessId, orderDetails }) => {
+    placeOrder: async (
+      _,
+      { placeOrderInput: { customer_name, business, orderDetails } }
+    ) => {
       const newOrder = new Order({
-        user: userId,
-        business: businessId,
+        customer_name,
+        business,
         orderDetails,
       });
-      const savedOrder = await newOrder.save();
-      console.log({ savedOrder });
-      pubsub.publish("NEW_ORDER", { newOrder: savedOrder });
-      return savedOrder;
+      await newOrder.save();
+      pubsub.publish(`NEW_ORDER_${business}`, {
+        orderCreated: {
+          _id: newOrder._id,
+          customer_name,
+          business,
+          orderDetails,
+        },
+      });
+      return newOrder;
+    },
+    closeOrder: async (_, { orderId }) => {
+      let order = await Order.findById(orderId);
+      order.status = "CLOSED";
+      await order.save();
+      return order;
     },
   },
   Subscription: {
-    newOrder: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator(["NEW_ORDER"]),
-        (payload, variables) => {
-          return payload.newOrder.business.toString() === variables.businessId;
-        }
-      ),
+    orderCreated: {
+      subscribe: (parent, args, context) => {
+        return pubsub.asyncIterator(`NEW_ORDER_${args.businessId}`);
+      },
     },
   },
 };

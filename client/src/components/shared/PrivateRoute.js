@@ -10,9 +10,7 @@ function PrivateRoute({ component, navigateTo }) {
     if (!token) {
       navigate(navigateTo);
     }
-    // if (!data) {
-    //   navigate(navigateTo);
-    // }
+
     if (data) {
       if (!data.authUser.authed) {
         navigate(navigateTo);
