@@ -21,6 +21,12 @@ function Navbar() {
         <>
           <div className="auth-links desktop">
             <NavLink
+              className="flex mr-5 text-white align-middle hover-link"
+              to="/co"
+            >
+              <span>Browse</span>
+            </NavLink>
+            <NavLink
               to="/vendor"
               className="flex mr-5 text-white align-middle cursor-pointer hover-link"
             >
