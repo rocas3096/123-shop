@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./shared/Input";
 import "./ProductForm.css";
-function ProductForm({ formData, setFormData, onSubmit }) {
+function ProductForm({ formData, setFormData, onSubmit, includeTitle }) {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
@@ -16,7 +16,10 @@ function ProductForm({ formData, setFormData, onSubmit }) {
   // };
   return (
     <form onSubmit={(e) => onSubmit(e)} className="add-product-form">
-      <h1 className="add-product-form-title text-secondary">Step 2!</h1>
+      {includeTitle && (
+        <h1 className="add-product-form-title text-secondary">Step 2!</h1>
+      )}
+
       <p className="add-product-form-sub-title">Add items to your menu</p>
       <div className="form-inputs">
         <Input

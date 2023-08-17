@@ -107,7 +107,28 @@ const resolvers = {
         throw new Error(error);
       }
     },
+    // updateProduct
+    updateProduct: async (_, { input }) => {
+      console.log({ input });
+      const { _id, product_name, product_description, price, quantity } = input;
 
+      try {
+        let foundProduct = await Product.findByIdAndUpdate(_id, {
+          product_name,
+          product_description,
+          price,
+          quantity,
+        });
+        await foundProduct.save();
+        return foundProduct;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    deleteProduct: async (_, { productId }) => {
+      let deletedProduct = await Product.findByIdAndDelete(productId);
+      return deletedProduct;
+    },
     // POST new Product
     createProduct: async (_, { productInput }) => {
       try {
@@ -188,12 +209,9 @@ const resolvers = {
       );
       return updatedBusiness;
     },
-    placeOrder: async (
-      _,
-      { placeOrderInput: { customer_name, business, orderDetails } }
-    ) => {
+    placeOrder: async (_, { placeOrderInput: { business, orderDetails } }) => {
+      console.log(business, orderDetails);
       const newOrder = new Order({
-        customer_name,
         business,
         orderDetails,
       });
@@ -201,7 +219,7 @@ const resolvers = {
       pubsub.publish(`NEW_ORDER_${business}`, {
         orderCreated: {
           _id: newOrder._id,
-          customer_name,
+
           business,
           orderDetails,
         },

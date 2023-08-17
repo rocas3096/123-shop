@@ -1,6 +1,7 @@
 .VendorPanelDrawer {
   background-color: white;
   padding: 0 20px;
+  /* position: fixed; */
 }
 .VendorPanelDrawer-logo {
   margin: 0 auto;
@@ -13,3 +14,57 @@
   row-gap: 5px;
   margin-top: 70px;
 }
+.exit-drawer {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  top: 0;
+  right: 0;
+  padding: 2px;
+  margin: 20px;
+  cursor: pointer;
+}
+@media screen and (max-width: 1328px) {
+  .VendorPanelDrawer {
+    background-color: white;
+
+    padding: 0;
+    position: fixed;
+
+    width: 0;
+    overflow-x: hidden;
+    max-width: 100%;
+    z-index: 9999999;
+    height: 100%;
+  }
+  .VendorPanelDrawer.active {
+    padding: 0 20px;
+    width: 350px;
+  }
+  .exit-drawer {
+    opacity: 1;
+    pointer-events: all;
+    position: absolute;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    top: 0;
+    right: 0;
+    padding: 2px;
+    margin: 20px;
+    cursor: pointer;
+  }
+}
+/* @media screen and (max-width: 1328px) {
+  .exit-drawer {
+    opacity: 1;
+    pointer-events: all;
+  }
+} */

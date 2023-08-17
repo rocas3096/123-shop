@@ -18,7 +18,6 @@ export const orderContext = createContext({});
 export const OrderProvider = ({ children }) => {
   const { business } = useContext(authUserContext);
   const businessId = business && business.getBusinessByUser[0]._id;
-
   const {
     err: closedOrdersError,
     loading: closedOrdersLoading,
@@ -38,7 +37,7 @@ export const OrderProvider = ({ children }) => {
   );
 
   const { data, loading } = useSubscription(NEW_ORDER_SUB, {
-    variables: { businessId },
+    variables: { businessId: business && business.getBusinessByUser[0]._id },
     onSubscriptionData: (data) => {
       document.title = "New Order";
       play();

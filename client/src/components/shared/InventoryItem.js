@@ -10,6 +10,9 @@ function InventoryItem({
   description,
   updateProduct,
   deleteProduct,
+  cartProduct,
+  formData,
+  setFormData,
 }) {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,7 +47,7 @@ function InventoryItem({
   };
   const handleSaveEdit = () => {
     setLoading(true);
-    updateProduct({ id, ...editFormData });
+    updateProduct({ _id: id, ...editFormData });
     setTimeout(() => {
       setLoading(false);
       setEditMode(false);
@@ -125,12 +128,25 @@ function InventoryItem({
             <p>{description}</p>
           )}
         </div>
+        {cartProduct && (
+          <button
+            onClick={() =>
+              setFormData((prev) => [
+                { price, item: title, description },
+                ...prev,
+              ])
+            }
+            className="add-to-cart-item"
+          >
+            Add to cart
+          </button>
+        )}
         <div className="inventory-item-btns">
           {editMode ? (
             <button onClick={handleSaveEdit} className="save-edit">
               Save
             </button>
-          ) : (
+          ) : cartProduct ? null : (
             <>
               <button onClick={toggleEditMode}>
                 <Update width="16px" height="16px" />

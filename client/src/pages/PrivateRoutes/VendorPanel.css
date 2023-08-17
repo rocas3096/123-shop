@@ -4,3 +4,8 @@
   display: grid;
   grid-template-columns: 300px 1fr;
 }
+@media screen and (max-width: 1328px) {
+  .VendorPanel {
+    grid-template-columns: 1fr;
+  }
+}

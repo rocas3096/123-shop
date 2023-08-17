@@ -16,9 +16,6 @@ function OrderCard({ order, btnTitle, completed }) {
     localStorage.setItem("orders", JSON.stringify(newArray));
     closeOrder({
       variables: { orderId: id },
-      completed() {
-        alert("D");
-      },
     });
 
     setClosing(true);

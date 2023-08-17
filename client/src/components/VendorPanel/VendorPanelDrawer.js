@@ -7,11 +7,16 @@ import Rewind from "../shared/Rewind";
 import ProductIco from "../shared/ProductIco";
 import Gear from "../shared/Gear";
 import { orderContext } from "../../context/orderContext";
-function VendorPanelDrawer() {
-  const [active, setActive] = useState(false);
+import { DrawersContext } from "../../context/drawersContext";
+import Exit from "../shared/Exit";
+function VendorPanelDrawer({ active }) {
+  const { toggleDrawerState, toggleDrawerOff } = useContext(DrawersContext);
   const { orders } = useContext(orderContext);
   return (
-    <div className="VendorPanelDrawer">
+    <div className={`VendorPanelDrawer ${toggleDrawerState && "active"}`}>
+      <div onClick={toggleDrawerOff} className="exit-drawer">
+        X
+      </div>
       <div className="VendorPanelDrawer-logo">
         <Logo123 width="70" />
       </div>

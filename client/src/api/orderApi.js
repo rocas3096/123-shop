@@ -1,21 +1,14 @@
 import { gql } from "@apollo/client";
 
 export const PLACE_ORDER_MUTATION = gql`
-  mutation PlaceOrder(
-    $userId: ID!
-    $businessId: ID!
-    $orderDetails: OrderItem!
-  ) {
-    placeOrder(
-      userId: $userId
-      businessId: $businessId
-      orderDetails: $orderDetails
-    ) {
+  mutation Mutation($placeOrderInput: PlaceOrderInput) {
+    placeOrder(placeOrderInput: $placeOrderInput) {
       _id
-      user
       business
+      status
       orderDetails {
         item
+        quantity
         price
       }
     }
@@ -26,7 +19,6 @@ export const NEW_ORDER_SUB = gql`
     orderCreated(businessId: $businessId) {
       _id
       business
-      customer_name
       orderDetails {
         item
         quantity
@@ -39,7 +31,7 @@ export const CLOSE_ORDER = gql`
   mutation Mutation($orderId: ID!) {
     closeOrder(orderId: $orderId) {
       _id
-      customer_name
+
       business
       status
       orderDetails {
@@ -54,7 +46,7 @@ export const GET_ORDERS_BY_BUSINESS = gql`
   query Query($businessId: ID!, $status: String!) {
     getOrdersByBusiness(businessId: $businessId, status: $status) {
       _id
-      customer_name
+
       business
       status
       orderDetails {
@@ -72,6 +64,18 @@ export const GET_ALL_PRODUCTS_BY_BUSINESS = gql`
       price
       product_description
       product_name
+      quantity
+    }
+  }
+`;
+export const CREATE_PRODUCT = gql`
+  mutation Mutation($productInput: CreateProductInput!) {
+    createProduct(productInput: $productInput) {
+      _id
+
+      product_description
+      price
+      quantity
     }
   }
 `;

@@ -124,6 +124,14 @@ const typeDefs = gql`
     description: String!
     address: String!
   }
+
+  input updateProductInput {
+    _id: ID!
+    product_name: String!
+    product_description: String!
+    price: Float!
+    quantity: Int
+  }
   type Query {
     getAllUsers: [User!]!
     getUser(userId: ID!): User
@@ -147,29 +155,29 @@ const typeDefs = gql`
     addToCart(input: AddToCartInput!): Cart
     closeOrder(orderId: ID!): Order!
     updateBusiness(input: UpdateBusinessInput!): Business
+    updateProduct(input: updateProductInput!): Product!
     addBusiness(input: AddBusinessInput!): Business
+    deleteProduct(productId: ID!): Product!
   }
 
   type OrderDetails {
     item: String!
     quantity: Int!
-    price: Int!
+    price: Float!
   }
 
   type Order {
     _id: ID!
-    customer_name: String!
     business: ID!
     status: String!
     orderDetails: [OrderDetails!]!
   }
   input OrderDetailsInput {
     item: String!
-    quantity: Int!
-    price: Int!
+    quantity: Int
+    price: Float!
   }
   input PlaceOrderInput {
-    customer_name: String!
     business: ID!
     orderDetails: [OrderDetailsInput!]!
   }
