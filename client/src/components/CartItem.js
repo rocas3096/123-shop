@@ -27,7 +27,7 @@ function CartItem({ _id, title, price, description, setQuantity }) {
   return (
     <div className="cart-item">
       <div className="image">
-        <img src="https://source.unsplash.com/featured?pizza" alt="" />
+        <img src={`https://source.unsplash.com/featured?${title}`} alt="" />
       </div>
       <div className="info">
         <div className="head">

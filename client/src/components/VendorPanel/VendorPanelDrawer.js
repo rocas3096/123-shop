@@ -9,6 +9,7 @@ import Gear from "../shared/Gear";
 import { orderContext } from "../../context/orderContext";
 import { DrawersContext } from "../../context/drawersContext";
 import Exit from "../shared/Exit";
+import { NavLink } from "react-router-dom";
 function VendorPanelDrawer({ active }) {
   const { toggleDrawerState, toggleDrawerOff } = useContext(DrawersContext);
   const { orders } = useContext(orderContext);
@@ -17,9 +18,9 @@ function VendorPanelDrawer({ active }) {
       <div onClick={toggleDrawerOff} className="exit-drawer">
         X
       </div>
-      <div className="VendorPanelDrawer-logo">
+      <NavLink to="/" className="block VendorPanelDrawer-logo">
         <Logo123 width="70" />
-      </div>
+      </NavLink>
       <div className="DrawerLinks">
         <DrawerLink
           title="Orders"

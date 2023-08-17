@@ -20,10 +20,10 @@ function Navbar() {
       {user ? (
         <>
           <div className="auth-links desktop">
-            <NavLink className="flex mr-5 text-white align-middle cursor-pointer hover-link">
-              <span>Inventory</span>
-            </NavLink>
-            <NavLink className="flex mr-5 text-white align-middle cursor-pointer hover-link">
+            <NavLink
+              to="/vendor"
+              className="flex mr-5 text-white align-middle cursor-pointer hover-link"
+            >
               <span>Dashboard</span>
             </NavLink>
             <div
@@ -37,27 +37,23 @@ function Navbar() {
             <div className="navbar-toggler">
               {user.getUser.first_name.substr(0, 1).toUpperCase()}
             </div>
-            {/* <NavLink className="flex mr-5 text-white align-middle cursor-pointer hover-link">
-              <span>Inventory</span>
-            </NavLink>
-            <NavLink className="flex mr-5 text-white align-middle cursor-pointer hover-link">
-              <span>Dashboard</span>
-            </NavLink>
-            <div
-              onClick={() => logoutUser(navigate, "/")}
-              className="flex mr-5 text-white align-middle cursor-pointer hover-link"
-            >
-              <span>Logout</span>
-            </div> */}
           </div>
         </>
       ) : (
-        <NavLink
-          className="flex mr-5 text-white align-middle hover-link"
-          to="/auth"
-        >
-          <span>Login/Signup</span>
-        </NavLink>
+        <div className="auth-links">
+          <NavLink
+            className="flex mr-5 text-white align-middle hover-link"
+            to="/co"
+          >
+            <span>Browse</span>
+          </NavLink>
+          <NavLink
+            className="flex mr-5 text-white align-middle hover-link"
+            to="/auth"
+          >
+            <span>Login/Signup</span>
+          </NavLink>
+        </div>
       )}
     </nav>
   );

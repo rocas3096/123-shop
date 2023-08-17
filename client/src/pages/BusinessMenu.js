@@ -51,16 +51,12 @@ function BusinessMenu() {
         },
       },
     });
+    setFormData([]);
+    setCartOpen(false);
   };
   if (placeOrderDataLoading) return <p>Loading...</p>;
   if (placeOrderError) return <p>Error: {placeOrderError.message}</p>;
-  // let product = {
-  //   _id: 12,
-  //   product_name: "Cheese",
-  //   product_description: "BEST",
-  //   price: 3.87,
-  //   quantity: 0,
-  // };
+
   console.log({ business_id });
   if (loading) return <p>Loading</p>;
   if (error) return <p>Error : {error.message}</p>;
@@ -130,6 +126,12 @@ function BusinessMenu() {
         </div>
       </div>
       <div onClick={() => setCartOpen(true)} className="cart-toggler">
+        {formData.length !== 0 ? (
+          <div className="count">{formData.length}</div>
+        ) : (
+          ""
+        )}
+
         <svg
           width="40px"
           height="40px"
