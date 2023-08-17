@@ -4,47 +4,72 @@
 
 Welcome to 123 shop where setting up your business is as easy as 1, 2, 3!! We are stripping down the requirements of getting your business online and available to everyone around you. Once your business is setup, you can add your products and business details, update your location, and let your customers know what you have available!
 
-## Table of Contents:
+## Table of Contents
 
-[Installation](#installation)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [GraphQL API](#graphql-api)
+- [Contributors](#contributors)
+- [License](#license)
 
-[Usage](#usage)
+## Getting Started
 
-[Contributing](#contributing)
+### Prerequisites
 
-[Questions](#questions)
+- Node.js (v14 or higher)
+- MongoDB (Make sure you have a running MongoDB instance)
 
-## Application
+### Installation
 
-Get your business online! Check out our application on [Heroku!](https://www.heroku.com/home)
+1. Clone the repository:
 
-## Installation
-
-First, download this repository.
-
-Open your terminal and direct into the 123-Shop folder
-
-Run this command in your terminal:
-
+```bash
+git clone https://github.com/yourusername/your-app.git
 ```
-npm run install
+
+2. Install dependencies:
+
+```bash
+cd your-app
+npm install
 ```
+
+3. Create a `.env` file in the root directory of the project and configure your environment variables:
+
+```env
+MONGODB_URI=your-mongodb-uri
+SECRET_KEY=your-secret-key
+```
+
+Replace `your-mongodb-uri` with your MongoDB connection URI and `your-secret-key` with a secret key for JWT token generation.
+
+4. Start the server:
+
+```bash
+npm start
+```
+
+The server will start at http://localhost:3001 by default.
 
 ## Usage
 
-To use the application, seed the database: 
+After starting the server, you can navigate to http://localhost:3001/graphql to access the GraphQL Playground, which provides an interactive interface for testing the API.
 
-```
-npm run seed
-```
+You can also check out our deployed application on [Heroku!](https://www.heroku.com/home)
 
-Then, you can start the server:
+## GraphQL API
 
-```
-npm run start
-```
+123-Shop uses GraphQL for its API. The GraphQL schema includes the following types:
 
-Navigate to your preferred browser and go to the link that is posted in your terminal (https://localhost:3001/graphql).
+- `User`: Represents a user in the system.
+- `Product`: Represents a product that can be associated with a business.
+- `Business`: Represents a business that users can create.
+- `Cart`: Represents a user's shopping cart.
+- `Order`: Represents an order placed by a user.
+
+You can find the full schema and usage examples in the `typedefs.js` file.
 
 ## Contributors
 
@@ -55,6 +80,6 @@ Navigate to your preferred browser and go to the link that is posted in your ter
  - [@miguela14](https://github.com/miguela14)
  - [@hani](https://github.com/hani)
 
-## Questions?
+## License
 
-If you have any questions, please don't reach out. Thanks!
+This project is licensed under the [MIT License](LICENSE).
