@@ -30,6 +30,8 @@ import Orders from "./pages/PrivateRoutes/Orders";
 import { OrderProvider } from "./context/orderContext";
 import PastOrders from "./pages/PrivateRoutes/PastOrders";
 import Products from "./pages/PrivateRoutes/Products";
+import BusinessResults from "./pages/BusinessResults";
+import BusinessMenu from "./pages/BusinessMenu";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:3001/graphql" || "/graphql",
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "/co",
+        element: <BusinessResults />,
+      },
+      {
+        path: "/co/:business_id",
+        element: <BusinessMenu />,
       },
     ],
   },

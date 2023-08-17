@@ -64,6 +64,15 @@ export const CREATE_BULK_PRODUCTS = gql`
     }
   }
 `;
+export const GET_ALL_BUSINESS = gql`
+  query Query {
+    getAllBusiness {
+      _id
+      business_name
+      description
+    }
+  }
+`;
 // export const REGISTER_USER = (userInput) => {
 //   return gql`
 //   mutation {

@@ -163,23 +163,21 @@ const typeDefs = gql`
   type OrderDetails {
     item: String!
     quantity: Int!
-    price: Int!
+    price: Float!
   }
 
   type Order {
     _id: ID!
-    customer_name: String!
     business: ID!
     status: String!
     orderDetails: [OrderDetails!]!
   }
   input OrderDetailsInput {
     item: String!
-    quantity: Int!
-    price: Int!
+    quantity: Int
+    price: Float!
   }
   input PlaceOrderInput {
-    customer_name: String!
     business: ID!
     orderDetails: [OrderDetailsInput!]!
   }

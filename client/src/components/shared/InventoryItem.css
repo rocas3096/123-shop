@@ -47,6 +47,15 @@
   /* height: 100%; */
   object-fit: cover;
 }
+.add-to-cart-item {
+  background-color: var(--bg-blue);
+  color: white;
+  padding: 5px 10px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
 .inventory-item-content {
   padding-left: 12px;
   padding-right: 25px;

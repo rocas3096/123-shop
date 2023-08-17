@@ -1,0 +1,208 @@
+.BusinessMenu {
+}
+.BusinessMenu-container {
+  width: 85%;
+  /* position: relative; */
+  margin: 0 auto;
+}
+.BusinessMenu-header {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 40px;
+  padding: 15px;
+  box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.363);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+.BusinessMenu-scrollable {
+  background-color: white;
+  /* height: 700px; */
+  max-height: 100%;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 380px));
+  justify-content: flex-start;
+  column-gap: 10px;
+
+  align-items: start;
+  padding: 20px;
+}
+
+.cart-modal {
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 999999;
+  background-color: white;
+  border: 1px solid var(--border);
+  width: 700px;
+  max-width: 95%;
+  height: 500px;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  transition: 0.2s;
+  display: grid;
+  grid-template-rows: 40px 1fr 80px;
+}
+
+.nav-toggler {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 100px;
+  z-index: 99999;
+  width: 50px;
+  height: 40px;
+  background-color: var(--bg-blue);
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px;
+  cursor: pointer;
+}
+.exit-cart {
+  opacity: 0;
+  pointer-events: none;
+
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  z-index: 99999999;
+}
+.exit-cart.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.nav-toggler::before {
+  content: "";
+  width: 30%;
+  background-color: white;
+  height: 3px;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+.nav-toggler::after {
+  content: "";
+  width: 30%;
+  background-color: white;
+  height: 3px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cart-modal.active {
+  pointer-events: all;
+  opacity: 1;
+  position: absolute;
+  transition: 0.2s;
+}
+.cart-toggler {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  background-color: var(--bg-blue);
+}
+@media screen and (max-width: 1328px) {
+  .nav-toggler {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  justify-content: center;
+  align-items: stretch;
+  column-gap: 10px;
+  padding: 50px 0;
+}
+
+.cart-item:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+.cart-item:first-child {
+  border-bottom: 1px solid var(--border);
+}
+.info {
+  display: grid;
+  grid-template-rows: 30px 1fr;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-body {
+  padding: 20px;
+  padding-right: 60px;
+
+  overflow-y: auto;
+}
+.cart-modal-header {
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  justify-content: space-between;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart-modal-header p {
+  font-size: 18px;
+  font-weight: 600;
+}
+.cart-item > .image {
+  width: 100px;
+  height: 100%;
+}
+.cart-item > .image img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+/* <div className="cart-modal-header">
+          <p>Cart - 2 items</p>
+        </div>
+        <div className="cart-body">
+          <div className="cart-item">
+            <div className="image">
+              <img src="https://source.unsplash.com/featured?pizza" alt="" />
+            </div>
+            <div className="info">
+              <div className="head">
+                <p className="title">Cheesy Tots</p>
+                <p className="price">$6.96</p>
+              </div>
+              <div className="body">
+                <p className="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                  suscipit, odio ac fermentum ornare, risus tellus facilisis
+                  tellus, in hendrerit odio est vel magna. Vestibulum dapibus
+                  felis nec eros posuere.
+                </p>
+                <div className="quantity">
+                  <input type="number" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */

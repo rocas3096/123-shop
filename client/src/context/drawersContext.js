@@ -20,6 +20,7 @@ export const DrawersContextProvider = ({ children }) => {
   const toggleDrawer = () => {
     setToggleDrawerState(true);
   };
+
   return (
     <DrawersContext.Provider
       value={{

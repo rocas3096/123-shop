@@ -209,12 +209,9 @@ const resolvers = {
       );
       return updatedBusiness;
     },
-    placeOrder: async (
-      _,
-      { placeOrderInput: { customer_name, business, orderDetails } }
-    ) => {
+    placeOrder: async (_, { placeOrderInput: { business, orderDetails } }) => {
+      console.log(business, orderDetails);
       const newOrder = new Order({
-        customer_name,
         business,
         orderDetails,
       });
@@ -222,7 +219,7 @@ const resolvers = {
       pubsub.publish(`NEW_ORDER_${business}`, {
         orderCreated: {
           _id: newOrder._id,
-          customer_name,
+
           business,
           orderDetails,
         },
