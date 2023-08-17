@@ -32,11 +32,11 @@ import PastOrders from "./pages/PrivateRoutes/PastOrders";
 import Products from "./pages/PrivateRoutes/Products";
 
 const httpLink = new HttpLink({
-  uri: "/graphql",
+  uri: "http://localhost:3001/graphql" || "/graphql",
 });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://${window.location.host}/graphql`,
+  uri: "ws://localhost:3001/graphql" || `wss://${window.location.host}/graphql`,
   options: {
     reconnect: true,
   },
