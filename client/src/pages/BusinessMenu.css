@@ -106,6 +106,20 @@
   position: absolute;
   transition: 0.2s;
 }
+.count {
+  background-color: red;
+  width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  top: -10px;
+  right: 0;
+  position: absolute;
+}
 .cart-toggler {
   position: fixed;
   width: 60px;
