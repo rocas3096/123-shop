@@ -11,8 +11,15 @@ export const DrawersContextProvider = ({ children }) => {
       setBackdrop(false);
     }
   };
+  const [toggleDrawerState, setToggleDrawerState] = useState(false);
   const [setupInvActive, setSetupInvActive] = useState(false);
   const [welcomeModal, setWelcomeModal] = useState(false);
+  const toggleDrawerOff = () => {
+    setToggleDrawerState(false);
+  };
+  const toggleDrawer = () => {
+    setToggleDrawerState(true);
+  };
   return (
     <DrawersContext.Provider
       value={{
@@ -22,6 +29,9 @@ export const DrawersContextProvider = ({ children }) => {
         toggleBackdrop,
         welcomeModal,
         setWelcomeModal,
+        toggleDrawer,
+        toggleDrawerState,
+        toggleDrawerOff,
       }}
     >
       {children}

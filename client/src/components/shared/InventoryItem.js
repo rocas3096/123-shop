@@ -44,7 +44,7 @@ function InventoryItem({
   };
   const handleSaveEdit = () => {
     setLoading(true);
-    updateProduct({ id, ...editFormData });
+    updateProduct({ _id: id, ...editFormData });
     setTimeout(() => {
       setLoading(false);
       setEditMode(false);

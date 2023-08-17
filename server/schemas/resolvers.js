@@ -107,7 +107,28 @@ const resolvers = {
         throw new Error(error);
       }
     },
+    // updateProduct
+    updateProduct: async (_, { input }) => {
+      console.log({ input });
+      const { _id, product_name, product_description, price, quantity } = input;
 
+      try {
+        let foundProduct = await Product.findByIdAndUpdate(_id, {
+          product_name,
+          product_description,
+          price,
+          quantity,
+        });
+        await foundProduct.save();
+        return foundProduct;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    deleteProduct: async (_, { productId }) => {
+      let deletedProduct = await Product.findByIdAndDelete(productId);
+      return deletedProduct;
+    },
     // POST new Product
     createProduct: async (_, { productInput }) => {
       try {

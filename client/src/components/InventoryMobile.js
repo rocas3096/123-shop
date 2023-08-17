@@ -68,8 +68,8 @@ function InventoryMobile({ products, updateProduct, deleteProduct }) {
         <div className="scrollable-container">
           {products.map((product) => (
             <InventoryItem
-              key={product.id}
-              id={product.id}
+              key={product._id}
+              id={product._id}
               title={product.product_name}
               description={product.product_description}
               price={product.price}

@@ -26,14 +26,14 @@ function VendorSetup() {
     useMutation(CREATE_BULK_PRODUCTS);
   const updateProduct = (updateProduct) => {
     const updatedItems = products.map((item) =>
-      item.id === updateProduct.id ? { ...item, ...updateProduct } : item
+      item._id === updateProduct._id ? { ...item, ...updateProduct } : item
     );
     setProducts(updatedItems);
   };
   const deleteProduct = (id) => {
     setProducts(
-      products.find((item) => item.id === id)
-        ? products.filter((item) => item.id !== id)
+      products.find((item) => item._id === id)
+        ? products.filter((item) => item._id !== id)
         : products
     );
   };
@@ -52,14 +52,14 @@ function VendorSetup() {
   }, [user, navigate, setWelcomeModal, firstBusiness]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    productFormData.id = uuid();
+    productFormData._id = uuid();
     productFormData.price = parseFloat(productFormData.price);
     setProducts((prevItems) => [productFormData, ...prevItems]);
     setProductFormData(INITIAL_STATE);
   };
   const handleProductSaveToDB = async () => {
     let noIdProducts = products.map((product) => {
-      delete product.id;
+      delete product._id;
       return product;
     });
     console.log({ noIdProducts });
@@ -85,6 +85,7 @@ function VendorSetup() {
           business_name={business && firstBusiness?.business_name}
         />
         <ProductForm
+          includeTitle
           formData={productFormData}
           setFormData={setProductFormData}
           onSubmit={handleSubmit}
