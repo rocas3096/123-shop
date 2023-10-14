@@ -57,7 +57,7 @@ The server will start at http://localhost:3001 by default.
 
 After starting the server, you can navigate to http://localhost:3001/graphql to access the GraphQL Playground, which provides an interactive interface for testing the API.
 
-You can also check out our deployed application on [Heroku!](https://www.heroku.com/home)
+You can also check out our deployed application on [Heroku!]([https://www.heroku.com/home](https://shop--123-f2fa6ddf19c1.herokuapp.com/))
 
 ## GraphQL API
 
