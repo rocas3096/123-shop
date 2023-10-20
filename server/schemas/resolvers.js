@@ -65,6 +65,19 @@ const resolvers = {
 
   Mutation: {
     // POST login user
+    // loginUser: async (_, { email, password }) => {
+    //   const user = await User.findOne({ email });
+    //   if (!user) {
+    //     return null; // Return null if user not found
+    //   }
+    //   const passwordAuthed = await user.isCorrectPassword(password);
+    //   if (!passwordAuthed) {
+    //     return null; // Return null if password is incorrect
+    //   }
+    //   const token = signToken(user);
+    //   return token;
+    // },
+
     loginUser: async (_, { email, password }) => {
       let errMsg = "";
       try {
@@ -82,9 +95,10 @@ const resolvers = {
         console.log(token);
         return token;
       } catch (error) {
-        throw new Error(errMsg);
+        console.error("Error in login:", error.message);
       }
     },
+    
     // POST new User
     createUser: async (_, { userInput }) => {
       console.log({ userInput });
