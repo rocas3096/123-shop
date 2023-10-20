@@ -36,11 +36,12 @@ cd your-app
 npm install
 ```
 
-3. Create a `.env` file in the root directory of the project and configure your environment variables:
+3. Create a `.env` file in the root directory of the server and configure your environment variables:
 
 ```env
 MONGODB_URI=your-mongodb-uri
-SECRET_KEY=your-secret-key
+JSON_WEB_TOKEN_SECRET=your-secret-key
+JSON_WEB_TOKEN_EXPIRATION=time-limit-here ex. 1h for one hour
 ```
 
 Replace `your-mongodb-uri` with your MongoDB connection URI and `your-secret-key` with a secret key for JWT token generation.
@@ -53,11 +54,27 @@ npm start
 
 The server will start at http://localhost:3001 by default.
 
+### Local Development
+
+For local development, you need to make changes in the `index.js` file as follows:
+
+1. Open the `client/src/index.js` file.
+
+2. Locate line 37, which defines the `httpLink` and replace the `uri` value with the following code in line 39, uncommenting it:
+
+   ```javascript
+   uri: "http://localhost:3001/graphql",
+   
+3. Similarly, locate line 42, which defines the wsLink, and replace the uri value with the following code, uncommenting it:
+
+   ```javascript
+   uri: "wss://localhost:3001/graphql",
+
 ## Usage
 
 After starting the server, you can navigate to http://localhost:3001/graphql to access the GraphQL Playground, which provides an interactive interface for testing the API.
 
-You can also check out our deployed application on [Heroku!](https://shop--123-f2fa6ddf19c1.herokuapp.com/)
+You can also check out our deployed application on [Heroku!](https://shop-123-0f298437f0bb.herokuapp.com/)
 
 ## GraphQL API
 
