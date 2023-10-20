@@ -9,6 +9,7 @@ Welcome to 123 shop where setting up your business is as easy as 1, 2, 3!! We ar
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Local Development](#local-development)
 - [Usage](#usage)
 - [GraphQL API](#graphql-api)
 - [Contributors](#contributors)
